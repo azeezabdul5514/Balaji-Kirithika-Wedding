@@ -7,7 +7,14 @@
 <meta name="description" content="You are invited to the wedding of Balaji & Krithika">
 <meta property="og:title" content="Balaji & Krithika — Wedding Invitation">
 <meta property="og:description" content="Tap to open our wedding invitation">
-<meta property="og:image" content="assets/couple.webp">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://azeezabdul5514.github.io/Balaji-Kirithika-Wedding/">
+<meta property="og:image" content="https://azeezabdul5514.github.io/Balaji-Kirithika-Wedding/assets/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
 <meta name="theme-color" content="#0b2547">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,7 +128,8 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .flap-wrap, #envelope { transition-duration: .01s; transition-delay: 0s; }
-  .seal, .flap-floral, #petals { animation: none !important; }
+  .seal, .seal::after, .flap-floral, .hero-floral, .gold, .sparkle, #petals { animation: none !important; }
+  .write { clip-path: none !important; animation: none !important; }
 }
 
 /* ============ PAGE BLOCKS ============ */
@@ -141,7 +149,12 @@ section { scroll-margin-top: 10px; }
 .hero-floral {
   position: absolute; top: 0; right: -6%; width: min(58%, 300px); z-index: 1;
   transform: rotate(180deg);   /* source art is a bottom-left corner */
+  animation: swayTR 7s ease-in-out infinite alternate;
 }
+@keyframes swayTR { from { transform: rotate(180deg); } to { transform: rotate(182deg) scale(1.02); } }
+@keyframes swayBL { from { transform: none; } to { transform: rotate(-2deg) scale(1.02); } }
+.hero-couple.reveal { transform: scale(.92); transform-origin: bottom left; transition-duration: 1.8s; }
+.hero-couple.reveal.visible { transform: none; }
 .hero-title {
   position: absolute; left: 10%; top: 20%; z-index: 2;
   font-weight: 300; font-size: clamp(28px, 8.4vw, 44px); line-height: 1.25; letter-spacing: .16em;
@@ -257,7 +270,40 @@ section { scroll-margin-top: 10px; }
 
 /* ============ CLOSING ============ */
 #closing { text-align: center; padding: 70px 0 50px; }
-#closing .hero-floral { right: auto; left: -8%; top: auto; bottom: 30px; width: min(48%, 240px); transform: none; opacity: .9; }
+#closing .hero-floral { right: auto; left: -8%; top: auto; bottom: 30px; width: min(48%, 240px); transform: none; opacity: .9; transform-origin: bottom left; animation: swayBL 8s ease-in-out infinite alternate; }
+
+/* ============ GOLD TOUCHES ============ */
+/* names: white script with a slow gold foil sweep */
+.gold {
+  color: transparent; -webkit-background-clip: text; background-clip: text;
+  background-image: linear-gradient(105deg, #fff 0%, #fff 40%, var(--gold-light) 47%, #fff8e6 50%, var(--gold) 53%, #fff 60%, #fff 100%);
+  background-size: 320% 100%; background-position: 100% 0;
+  padding: .12em .4em; margin: -.12em -.4em;   /* room for script swashes, which background-clip would otherwise cut */
+  animation: foil 7s ease-in-out infinite 2.5s;
+}
+@keyframes foil { 0% { background-position: 100% 0; } 45%, 100% { background-position: 0 0; } }
+/* handwriting: the name is "written" left to right as it appears */
+.write { clip-path: inset(-40% 100% -40% -10%); }
+.visible .write, .write.visible { animation: write 1.5s cubic-bezier(.55,.1,.35,1) forwards; }
+.hero-names .write:nth-child(2) { animation-delay: .9s; }
+.hero-names .write:nth-child(3) { animation-delay: 1.3s; }
+@keyframes write { to { clip-path: inset(-40% -10% -40% -10%); } }
+/* gold flourish under section headings, echoing the seal's scrollwork */
+.flourish { display: block; width: 150px; height: 22px; margin: 2px auto 0; color: var(--gold); }
+/* shine across the seal monogram */
+.seal::after {
+  content: ''; position: absolute; inset: 28% 24%; pointer-events: none;
+  -webkit-mask: url(assets/monogram.webp) center / contain no-repeat; mask: url(assets/monogram.webp) center / contain no-repeat;
+  background: linear-gradient(110deg, transparent 40%, rgba(255,250,230,.95) 50%, transparent 60%) 100% 0 / 300% 100% no-repeat;
+  animation: foil 3.5s ease-in-out infinite;
+}
+/* soft gold sparkles over the navy */
+.sparkle {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%; pointer-events: none; z-index: 0;
+  background: var(--gold-light); box-shadow: 0 0 6px 1px rgba(230,207,154,.7); opacity: 0;
+  animation: twinkle ease-in-out infinite;
+}
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.6); } 50% { opacity: .85; transform: scale(1); } }
 .closing-quote { font-size: clamp(13px, 3.8vw, 16px); line-height: 1.9; padding: 0 24px; }
 .closing-names { font-family: var(--script); font-size: clamp(50px, 13.5vw, 96px); line-height: 1.1; margin-top: 18px; padding: 0 12px; }
 .closing-from { font-size: 11px; letter-spacing: .35em; text-transform: uppercase; color: var(--sky); margin-top: 6px; }
@@ -291,6 +337,15 @@ footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top
     <use href="#lf" transform="translate(220 0) scale(-.9 .9) translate(-6 -160)"/>
     <use href="#lf" transform="translate(222 0) scale(-.72 .72) translate(-20 -240)"/>
   </symbol>
+  <symbol id="flourish" viewBox="0 0 200 30" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+    <g id="fl-half">
+      <path d="M92 15 C84 15 80 7 71 8 C62 9 62 21 70 20 C76 19 75 12 70 13"/>
+      <path d="M71 8 C56 3 46 21 30 16 C22 13 14 15 4 15"/>
+      <path d="M46 13 C42 6 33 7 35 12 C36 15 40 14 39 12"/>
+    </g>
+    <use href="#fl-half" transform="translate(200 0) scale(-1 1)"/>
+    <path d="M100 9 L105 15 L100 21 L95 15 Z" fill="currentColor" stroke="none"/>
+  </symbol>
 </svg>
 
 <!-- ============ ENVELOPE ============ -->
@@ -320,9 +375,9 @@ footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top
     </h1>
     <img class="hero-couple reveal" src="assets/couple.webp" alt="Illustration of the couple exchanging garlands">
     <div class="hero-names reveal">
-      <span data-bind="groom.short"></span>
-      <span class="amp">&amp;</span>
-      <span data-bind="bride.short"></span>
+      <span class="write"><span class="gold" data-bind="groom.short"></span></span>
+      <span class="amp write"><span class="gold">&amp;</span></span>
+      <span class="write"><span class="gold" data-bind="bride.short"></span></span>
     </div>
     <a class="scroll-hint" href="#invite"><span>Scroll down</span><i class="fa-solid fa-chevron-down"></i></a>
   </div>
@@ -335,12 +390,12 @@ footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top
   <div class="panel-inner">
     <p class="invite-lead spaced reveal" data-bind="inviteLead"></p>
     <div class="invite-person reveal">
-      <div class="invite-name" data-bind="groom.full"></div>
+      <div class="invite-name write" data-bind="groom.full"></div>
       <div class="invite-parents" data-bind="groom.parents"></div>
     </div>
     <p class="invite-with spaced reveal">With</p>
     <div class="invite-person reveal">
-      <div class="invite-name" data-bind="bride.full"></div>
+      <div class="invite-name write" data-bind="bride.full"></div>
       <div class="invite-parents" data-bind="bride.parents"></div>
     </div>
     <p class="invite-close spaced reveal" data-bind="inviteClose"></p>
@@ -403,7 +458,7 @@ footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top
   <img class="hero-floral" src="assets/floral-white.webp" alt="">
   <div class="panel-inner">
     <p class="closing-quote spaced reveal" data-bind="closingQuote"></p>
-    <div class="closing-names reveal" data-bind="couple"></div>
+    <div class="closing-names reveal"><span class="write" style="display:inline-block"><span class="gold" data-bind="couple"></span></span></div>
     <p class="closing-from reveal" data-bind="closingFrom"></p>
     <div class="closing-actions reveal">
       <a class="btn light solid" id="share-btn" target="_blank" rel="noopener"><i class="fa-solid fa-share-nodes"></i> Share Invite</a>
@@ -592,6 +647,21 @@ function burstPetals() {
   for (let i = 0; i < 40; i++) petal(1.5);
   setInterval(() => petal(0), 1600);
 }
+
+/* ── Gold flourish under each section heading ── */
+document.querySelectorAll('.section-title h2').forEach(h =>
+  h.insertAdjacentHTML('afterend', '<svg class="flourish" aria-hidden="true"><use href="#flourish"/></svg>'));
+
+/* ── Sparkles ── */
+if (!reduced) ['home', 'invite', 'closing'].forEach(id => {
+  const host = document.getElementById(id);
+  for (let i = 0; i < 18; i++) {
+    const sp = document.createElement('span');
+    sp.className = 'sparkle';
+    sp.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;animation-duration:${3 + Math.random() * 4}s;animation-delay:${-Math.random() * 6}s;`;
+    host.appendChild(sp);
+  }
+});
 
 /* ── Scroll reveal ── */
 const io = new IntersectionObserver(entries => {
