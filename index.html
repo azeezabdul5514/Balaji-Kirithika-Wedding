@@ -30,7 +30,6 @@
   --gold-light: #e6cf9a;
   --paper: #f5efe3;
   --paper-ink: #1b2f50;
-  --nav-h: 64px;
   --script: 'Mrs Saint Delafield', cursive;
   --sans: 'Quicksand', sans-serif;
 }
@@ -172,7 +171,9 @@ section { scroll-margin-top: 10px; }
 
 /* ============ SHARED ============ */
 .page { max-width: 520px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
-.divider { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 54px 0; color: var(--sky); }
+.divider { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 54px 0 14px; color: var(--sky); }
+.scroll-hint.next { margin-bottom: 54px; }
+#countdown-section .scroll-hint.next { margin: 40px 0 0; }
 .divider::before, .divider::after { content: ''; height: 1px; width: 70px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
 .divider svg { width: 26px; height: 26px; }
 .section-title { text-align: center; margin-bottom: 26px; }
@@ -255,7 +256,7 @@ section { scroll-margin-top: 10px; }
 .cd-done { text-align: center; font-family: var(--script); font-size: 56px; }
 
 /* ============ CLOSING ============ */
-#closing { text-align: center; padding: 70px 0 calc(var(--nav-h) + 50px); }
+#closing { text-align: center; padding: 70px 0 50px; }
 #closing .hero-floral { right: auto; left: -8%; top: auto; bottom: 30px; width: min(48%, 240px); transform: none; opacity: .9; }
 .closing-quote { font-size: clamp(13px, 3.8vw, 16px); line-height: 1.9; padding: 0 24px; }
 .closing-names { font-family: var(--script); font-size: clamp(50px, 13.5vw, 96px); line-height: 1.1; margin-top: 18px; padding: 0 12px; }
@@ -263,25 +264,14 @@ section { scroll-margin-top: 10px; }
 .closing-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; position: relative; z-index: 2; }
 footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top: 36px; }
 
-/* ============ BOTTOM NAV ============ */
-#nav {
-  position: fixed; left: 50%; bottom: 12px; z-index: 50;
-  width: min(420px, calc(100% - 24px)); height: var(--nav-h);
-  transform: translate(-50%, 140%); transition: transform .5s cubic-bezier(.22,.61,.36,1);
-  display: grid; grid-template-columns: repeat(4, 1fr); align-items: center;
-  background: rgba(11,37,71,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  margin-bottom: env(safe-area-inset-bottom);
+/* ============ MUSIC BUTTON ============ */
+#music-btn {
+  position: fixed; top: calc(14px + env(safe-area-inset-top)); right: 14px; z-index: 50;
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(11,37,71,.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--line); color: var(--muted); font-size: 15px;
 }
-#nav.show { transform: translate(-50%, 0); }
-#nav a, #nav button {
-  display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: 0; cursor: pointer;
-  color: var(--muted); font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; transition: color .2s;
-}
-#nav [hidden] { display: none; }
-#nav i { font-size: 17px; }
-#nav a.active, #nav a:hover, #nav button:hover { color: #fff; }
-#nav a.active i { color: var(--blush); }
 #music-btn.playing i { animation: beat 1.2s ease-in-out infinite; color: var(--blush); }
 @keyframes beat { 0%,100% { transform: scale(1); } 40% { transform: scale(1.2); } }
 </style>
@@ -370,6 +360,7 @@ footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top
   </section>
 
   <div class="divider reveal" aria-hidden="true"><svg viewBox="0 0 200 320"><use href="#branch"/></svg></div>
+  <a class="scroll-hint next reveal" href="#gallery-section"><span>Scroll down</span><i class="fa-solid fa-chevron-down"></i></a>
 
   <!-- ============ GALLERY ============ -->
   <section id="gallery-section">
@@ -382,6 +373,7 @@ footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top
   </section>
 
   <div class="divider reveal" aria-hidden="true"><svg viewBox="0 0 200 320"><use href="#branch"/></svg></div>
+  <a class="scroll-hint next reveal" href="#events"><span>Scroll down</span><i class="fa-solid fa-chevron-down"></i></a>
 
   <!-- ============ EVENTS ============ -->
   <section id="events">
@@ -401,6 +393,7 @@ footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top
       <div class="cd-tile"><span class="cd-num" id="cd-mins">--</span><span class="cd-word">Mins</span></div>
       <div class="cd-tile"><span class="cd-num" id="cd-secs">--</span><span class="cd-word">Secs</span></div>
     </div>
+    <a class="scroll-hint next reveal" href="#closing"><span>Scroll down</span><i class="fa-solid fa-chevron-down"></i></a>
   </section>
 
 </main>
@@ -419,13 +412,7 @@ footer { font-size: 11px; letter-spacing: .15em; color: var(--muted); margin-top
   </div>
 </section>
 
-<!-- ============ BOTTOM NAV ============ -->
-<nav id="nav" aria-label="Sections">
-  <a href="#home" data-sec="home"><i class="fa-solid fa-house"></i>Home</a>
-  <a href="#story" data-sec="story"><i class="fa-solid fa-heart"></i>Story</a>
-  <a href="#events" data-sec="events"><i class="fa-solid fa-calendar-days"></i>Events</a>
-  <button id="music-btn" type="button" aria-label="Play or pause music"><i class="fa-solid fa-music"></i><span id="music-label">Music</span></button>
-</nav>
+<button id="music-btn" type="button" aria-label="Play or pause music" hidden><i class="fa-solid fa-music"></i></button>
 
 <script>
 /* ============================================================
@@ -568,7 +555,7 @@ function toggleMap(i, btn) {
 /* ── Envelope + music ── */
 const audio = new Audio();
 audio.loop = true; audio.volume = 0.45;
-audio.addEventListener('error', () => { document.getElementById('music-btn').hidden = true; document.getElementById('nav').style.gridTemplateColumns = 'repeat(3, 1fr)'; });
+audio.addEventListener('canplay', () => { document.getElementById('music-btn').hidden = false; }, { once: true });   // only shown when music.mp3 exists
 audio.src = CONFIG.music;
 audio.load();
 
@@ -576,7 +563,6 @@ const musicBtn = document.getElementById('music-btn');
 function setPlaying(on) {
   musicBtn.classList.toggle('playing', on);
   musicBtn.querySelector('i').className = on ? 'fa-solid fa-volume-high' : 'fa-solid fa-music';
-  document.getElementById('music-label').textContent = on ? 'Pause' : 'Music';
 }
 function playMusic() { audio.play().then(() => setPlaying(true)).catch(() => {}); }
 musicBtn.addEventListener('click', () => { if (audio.paused) playMusic(); else { audio.pause(); setPlaying(false); } });
@@ -612,18 +598,6 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
 }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => { if (!el.closest('#home')) io.observe(el); });
-
-/* ── Bottom nav: show after hero, highlight current section ── */
-const nav = document.getElementById('nav');
-new IntersectionObserver(([e]) => nav.classList.toggle('show', !e.isIntersecting), { threshold: 0.35 })
-  .observe(document.getElementById('home'));
-const navLinks = [...nav.querySelectorAll('a[data-sec]')];
-const secObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('active', a.dataset.sec === e.target.id));
-  });
-}, { rootMargin: '-45% 0px -50% 0px' });
-navLinks.forEach(a => { const s = document.getElementById(a.dataset.sec); if (s) secObserver.observe(s); });
 
 /* ── Countdown ── */
 const target = new Date(CONFIG.countdownTo);
