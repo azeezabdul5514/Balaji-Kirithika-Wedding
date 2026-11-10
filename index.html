@@ -21,7 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preload" as="image" href="assets/floral-blue.webp">
-<link rel="preload" as="image" href="assets/monogram.webp">
+<link rel="preload" as="image" href="assets/seal.webp">
 <style>
 :root {
   --navy: #0b2547;
@@ -81,24 +81,18 @@ img { max-width: 100%; display: block; }
 }
 .cover-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
 .cover-content .label { color: var(--gold-light); }
-.mandala-wrap {
-  position: relative; width: min(80vw, 330px); aspect-ratio: 1; margin: 0 auto;
-  background: none; border: 0; cursor: pointer; display: block;
+.seal {
+  position: relative; width: min(48vw, 190px); aspect-ratio: 1165 / 1152; margin: 26px 0 22px;
+  background: none; border: 0; cursor: pointer;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+  animation: pulse 2.6s ease-in-out infinite;
 }
-.mandala-wrap::before {
-  content: ''; position: absolute; inset: 12%; border-radius: 50%;
-  background: radial-gradient(circle, rgba(230,207,154,.28) 0%, rgba(230,207,154,0) 70%);
-}
-.mandala { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--gold-light); overflow: visible; }
-.mandala .spin { transform-origin: 0 0; animation: spin 80s linear infinite; }
-.mandala .spin-rev { transform-origin: 0 0; animation: spin 50s linear infinite reverse; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.mandala-mono {
-  position: absolute; left: 50%; top: 50%; width: 32%; transform: translate(-50%, -50%);
-  filter: drop-shadow(0 1px 1px rgba(90,60,10,.35));
-}
+.seal img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.seal .mono { inset: 28% 24%; width: 52%; height: 44%; object-fit: contain; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+.cover-title { font-family: var(--display); font-size: 24px; font-weight: 500; letter-spacing: .12em; color: #fff; line-height: 1.3; }
 .cover-btn {
-  margin-top: 36px; display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 30px; display: inline-flex; align-items: center; gap: 10px;
   padding: 13px 26px; border-radius: 40px; border: 1px solid var(--gold);
   background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--navy);
   font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
@@ -112,7 +106,7 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   #cover { transition-duration: .01s; }
-  .mandala .spin, .mandala .spin-rev, .sparkle { animation: none !important; }
+  .seal, .sparkle { animation: none !important; }
 }
 
 /* ============ HERO ============ */
@@ -258,10 +252,12 @@ footer { font-family: var(--sans); font-size: 11px; letter-spacing: .12em; color
   <img class="cover-floral br" src="assets/floral-blue.webp" alt="">
   <div class="cover-frame"></div>
   <div class="cover-content">
-    <button class="mandala-wrap" id="seal-btn" type="button" aria-label="View the invitation">
-      <svg class="mandala" id="mandala" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
-      <img class="mandala-mono" src="assets/monogram.webp" alt="">
+    <p class="label">With joy in our hearts</p>
+    <button class="seal" id="seal-btn" type="button" aria-label="View the invitation">
+      <img src="assets/seal.webp" alt="">
+      <img class="mono" src="assets/monogram.webp" alt="">
     </button>
+    <div class="cover-title">You Are Invited</div>
     <button class="cover-btn" id="open-btn" type="button"><i class="fa-regular fa-envelope-open"></i> View Invitation</button>
   </div>
 </div>
@@ -447,32 +443,6 @@ document.getElementById('event-list').innerHTML = CONFIG.events.map((ev, i) => `
 /* ── Gold flourish under each heading ── */
 document.querySelectorAll('.heading h2').forEach(h =>
   h.insertAdjacentHTML('afterend', '<svg class="flourish" aria-hidden="true"><use href="#flourish"/></svg>'));
-
-/* ── Cover mandala: gold kolam line-art drawn from rings of petals ── */
-(function () {
-  const ring = (n, d, extra = '') => Array.from({ length: n }, (_, i) =>
-    `<path d="${d}" transform="rotate(${i * 360 / n})" ${extra}/>`).join('');
-  const dots = (n, r, size) => Array.from({ length: n }, (_, i) =>
-    `<circle cx="0" cy="${-r}" r="${size}" transform="rotate(${i * 360 / n + 180 / n})" fill="currentColor" stroke="none"/>`).join('');
-  document.getElementById('mandala').innerHTML = `
-    <g fill="none" stroke="currentColor" stroke-width=".9" stroke-linecap="round">
-      <g class="spin">
-        <circle r="97" opacity=".5"/>
-        ${ring(32, 'M0,-97 C3,-93 3,-88 0,-85 C-3,-88 -3,-93 0,-97Z')}
-        ${dots(32, 92, .9)}
-        <circle r="84"/>
-        ${ring(16, 'M0,-84 C12,-76 12,-62 0,-54 C-12,-62 -12,-76 0,-84Z')}
-        ${ring(16, 'M0,-80 C6,-74 6,-64 0,-58 C-6,-64 -6,-74 0,-80Z', 'opacity=".6"')}
-      </g>
-      <g class="spin-rev">
-        ${dots(16, 70, 1.4)}
-        <circle r="54"/>
-        <circle r="49" opacity=".6" stroke-dasharray="1.5 3"/>
-      </g>
-      <circle r="44" fill="#f7f2e8" stroke="var(--gold)" stroke-width="2.2"/>
-      <circle r="39.5" stroke="var(--gold)" stroke-width=".8"/>
-    </g>`;
-})();
 
 /* ── Sparkles ── */
 if (!reduced) ['cover', 'home', 'closing'].forEach(id => {
