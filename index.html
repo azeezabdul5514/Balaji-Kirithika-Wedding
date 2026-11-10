@@ -18,7 +18,7 @@
 <meta name="theme-color" content="#0b2547">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preload" as="image" href="assets/floral-blue.webp">
 <link rel="preload" as="image" href="assets/seal.webp">
@@ -37,7 +37,7 @@
   --paper: #f7f2e8;
   --paper-ink: #1b2f50;
   --paper-muted: #5d6f8f;
-  --script: 'Great Vibes', cursive;
+  --display: 'Cinzel', 'Times New Roman', serif;
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'Jost', system-ui, sans-serif;
 }
@@ -62,7 +62,6 @@ img { max-width: 100%; display: block; }
   font-family: var(--sans); font-weight: 400; font-size: 11px;
   letter-spacing: .28em; text-transform: uppercase; color: var(--sky);
 }
-.script { font-family: var(--script); font-weight: 400; }
 .wrap { max-width: 440px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
 
 /* ============ COVER ============ */
@@ -91,8 +90,8 @@ img { max-width: 100%; display: block; }
 .seal img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .seal .mono { inset: 28% 24%; width: 52%; height: 44%; object-fit: contain; }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
-.cover-names { font-family: var(--script); font-size: 42px; line-height: 1.15; color: #fff; }
-.cover-date { font-family: var(--sans); font-size: 12px; letter-spacing: .3em; color: var(--muted); margin-top: 8px; }
+.cover-title { font-family: var(--display); font-size: 24px; font-weight: 500; letter-spacing: .12em; color: #fff; line-height: 1.3; }
+.cover-line { font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.5; color: var(--muted); margin-top: 10px; max-width: 280px; }
 .cover-btn {
   margin-top: 30px; display: inline-flex; align-items: center; gap: 10px;
   padding: 13px 26px; border-radius: 40px; border: 1px solid var(--gold);
@@ -108,31 +107,29 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   #cover { transition-duration: .01s; }
-  .seal, .sparkle, .hero-floral { animation: none !important; }
+  .seal, .sparkle { animation: none !important; }
 }
 
 /* ============ HERO ============ */
-#home { position: relative; overflow: hidden; padding: 54px 0 40px; text-align: center; }
-.hero-floral { position: absolute; width: min(46vw, 210px); pointer-events: none; z-index: 0; opacity: .9; }
-.hero-floral.tr { top: -24px; right: -34px; width: min(30vw, 130px); opacity: .75; transform: rotate(180deg) scaleX(-1); }
-.hero-floral.tl { top: -24px; left: -34px; width: min(30vw, 130px); opacity: .75; transform: rotate(180deg); }
-.hero-floral.bl { bottom: 30%; left: -30px; width: min(36vw, 160px); opacity: .5; }
-.hero-kicker { margin-bottom: 6px; }
-.hero-names { font-family: var(--script); font-size: 50px; line-height: 1.05; color: #fff; }
-.hero-names .amp { display: block; font-size: 34px; color: var(--gold-light); margin: 2px 0; }
-.hero-date {
-  display: inline-flex; align-items: center; gap: 12px; margin-top: 14px;
-  font-family: var(--sans); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--ink);
-}
-.hero-date::before, .hero-date::after { content: ''; width: 28px; height: 1px; background: var(--gold); }
+#home { position: relative; overflow: hidden; padding: 84px 0 36px; text-align: center; }
+.arch-wrap { position: relative; width: 78%; max-width: 290px; margin: 0 auto; }
 .arch {
-  position: relative; width: 82%; max-width: 300px; margin: 30px auto 0; aspect-ratio: 3 / 3.6;
+  position: relative; aspect-ratio: 3 / 3.6;
   border-radius: 999px 999px 18px 18px; overflow: hidden;
   background: linear-gradient(180deg, #dce6f3 0%, #f4efe6 100%);
-  border: 1px solid rgba(201,164,92,.6);
-  box-shadow: 0 0 0 6px rgba(255,255,255,.04), 0 18px 40px rgba(0,0,0,.35);
+  border: 1px solid rgba(201,164,92,.7);
+  box-shadow: 0 0 0 5px var(--navy), 0 0 0 6px rgba(201,164,92,.55), 0 18px 40px rgba(0,0,0,.4);
 }
 .arch img { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 92%; height: auto; }
+.hero-floral { position: absolute; top: 0; width: min(44vw, 200px); pointer-events: none; z-index: 0; }
+.hero-floral.tl { left: 0; }
+.hero-floral.tr { right: 0; transform: scaleX(-1); }
+.hero-kicker { margin-top: 44px; }
+.hero-names { font-family: var(--display); font-weight: 500; font-size: 30px; letter-spacing: .12em; line-height: 1.25; color: #fff; margin-top: 8px; }
+.hero-names .amp { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 26px; letter-spacing: 0; color: var(--gold-light); margin: 2px 0; }
+.hero-date { display: flex; align-items: center; justify-content: center; margin-top: 22px; }
+.hero-date > span { font-family: var(--sans); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--ink); padding: 8px 14px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+.hero-date > b { font-family: var(--display); font-weight: 500; font-size: 40px; line-height: 1; color: var(--gold-light); padding: 0 16px; }
 .scroll-hint {
   display: inline-flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 28px;
   font-family: var(--sans); font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
@@ -144,7 +141,7 @@ img { max-width: 100%; display: block; }
 /* ============ SECTION HEADINGS ============ */
 section { padding: 44px 0; }
 .heading { text-align: center; margin-bottom: 22px; }
-.heading h2 { font-family: var(--script); font-weight: 400; font-size: 40px; line-height: 1.2; color: #fff; margin-top: 2px; }
+.heading h2 { font-family: var(--display); font-weight: 500; font-size: 25px; letter-spacing: .1em; line-height: 1.3; color: #fff; margin-top: 6px; }
 .flourish { display: block; width: 120px; height: 18px; margin: 4px auto 0; color: var(--gold); }
 
 /* ============ INVITATION CARD ============ */
@@ -160,10 +157,10 @@ section { padding: 44px 0; }
 .blessing { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--paper-muted); }
 .invite-lead { font-size: 17px; line-height: 1.55; margin: 14px auto 0; max-width: 300px; }
 .person { margin-top: 20px; }
-.person-name { font-family: var(--script); font-size: 38px; line-height: 1.2; color: var(--navy-3); }
+.person-name { font-family: var(--display); font-weight: 600; font-size: 24px; letter-spacing: .08em; line-height: 1.3; color: var(--navy-3); }
 .person-parents { font-family: var(--sans); font-size: 12px; letter-spacing: .06em; color: var(--paper-muted); margin-top: 2px; }
 .person-parents b { display: block; font-weight: 500; color: var(--paper-ink); letter-spacing: .02em; font-size: 13px; }
-.with { font-family: var(--script); font-size: 30px; color: var(--gold); margin-top: 14px; line-height: 1; }
+.with { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--gold); margin-top: 16px; line-height: 1; }
 .invite-close { font-size: 16px; font-style: italic; margin-top: 24px; line-height: 1.55; }
 
 /* ============ EVENTS ============ */
@@ -172,20 +169,22 @@ section { padding: 44px 0; }
   overflow: hidden; margin-bottom: 18px;
 }
 .event-head {
-  display: flex; align-items: center; gap: 14px; padding: 18px 18px 14px;
-  border-bottom: 1px solid var(--line);
+  text-align: center; padding: 22px 18px 16px;
+  background: linear-gradient(180deg, rgba(201,164,92,.14), transparent);
+  border-bottom: 1px solid rgba(201,164,92,.3);
 }
 .event-icon {
-  flex: 0 0 46px; height: 46px; border-radius: 50%;
+  width: 42px; height: 42px; margin: 0 auto 10px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--navy); font-size: 18px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--navy); font-size: 16px;
 }
-.event-name { font-family: var(--script); font-size: 32px; line-height: 1.1; color: #fff; }
+.event-name { font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.2; color: var(--gold-light); }
+.event-head .label { margin-top: 4px; color: var(--ink); }
 .event-body { padding: 14px 18px 18px; }
 .row { display: flex; gap: 12px; align-items: flex-start; margin-top: 10px; }
 .row:first-child { margin-top: 0; }
 .row i { width: 16px; flex: 0 0 16px; text-align: center; color: var(--gold-light); font-size: 13px; margin-top: 5px; }
-.row-main { font-size: 17px; font-weight: 600; line-height: 1.35; }
+.row-main { font-size: 18px; font-weight: 600; line-height: 1.35; }
 .row-sub { font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
 .event-map { display: block; width: 100%; height: 170px; border: 0; border-radius: 12px; margin-top: 16px; background: var(--navy-2); }
 .event-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
@@ -202,13 +201,14 @@ section { padding: 44px 0; }
 .cd-tile { border: 1px solid var(--line); border-radius: 14px; padding: 14px 2px 10px; text-align: center; background: rgba(255,255,255,.04); }
 .cd-num { display: block; font-family: var(--serif); font-size: 30px; font-weight: 500; line-height: 1; }
 .cd-word { display: block; font-family: var(--sans); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--sky); margin-top: 6px; }
-.cd-done { text-align: center; font-family: var(--script); font-size: 40px; }
+.cd-done { text-align: center; font-family: var(--display); font-size: 26px; letter-spacing: .1em; }
 
 /* ============ CLOSING ============ */
 #closing { text-align: center; padding: 50px 0 40px; position: relative; overflow: hidden; }
 .closing-quote { font-size: 18px; font-style: italic; line-height: 1.6; max-width: 320px; margin: 0 auto; }
-.closing-names { font-family: var(--script); font-size: 40px; line-height: 1.2; margin-top: 14px; color: #fff; }
+.closing-names { font-family: var(--display); font-weight: 500; font-size: 24px; letter-spacing: .1em; line-height: 1.3; margin-top: 16px; color: #fff; }
 .closing-from { margin-top: 4px; }
+.closing-floral { position: absolute; bottom: 20px; left: -30px; width: min(36vw, 160px); opacity: .6; pointer-events: none; }
 #share-btn { margin-top: 24px; padding: 12px 22px; }
 footer { font-family: var(--sans); font-size: 11px; letter-spacing: .12em; color: var(--muted); margin-top: 34px; }
 
@@ -224,12 +224,11 @@ footer { font-family: var(--sans); font-size: 11px; letter-spacing: .12em; color
 /* very small phones */
 @media (max-width: 350px) {
   body { font-size: 16px; }
-  .hero-names { font-size: 44px; }
-  .cover-names, .heading h2, .closing-names { font-size: 36px; }
-  .person-name { font-size: 34px; }
+  .hero-names { font-size: 26px; }
+  .heading h2, .closing-names, .person-name { font-size: 21px; }
   .cd-num { font-size: 26px; }
-  .hero-date { letter-spacing: .16em; gap: 8px; }
-  .hero-date::before, .hero-date::after { width: 14px; }
+  .hero-date > span { font-size: 11px; letter-spacing: .16em; padding: 8px 8px; }
+  .hero-date > b { font-size: 34px; padding: 0 10px; }
   .event-actions { grid-template-columns: 1fr; }
 }
 </style>
@@ -254,32 +253,32 @@ footer { font-family: var(--sans); font-size: 11px; letter-spacing: .12em; color
   <img class="cover-floral br" src="assets/floral-blue.webp" alt="">
   <div class="cover-frame"></div>
   <div class="cover-content">
-    <p class="label">You are cordially invited</p>
+    <p class="label">With joy in our hearts</p>
     <button class="seal" id="seal-btn" type="button" aria-label="View the invitation">
       <img src="assets/seal.webp" alt="">
       <img class="mono" src="assets/monogram.webp" alt="">
     </button>
-    <div class="cover-names" data-bind="couple"></div>
-    <div class="cover-date" data-bind="dateShort"></div>
+    <div class="cover-title">You Are Invited</div>
+    <p class="cover-line">Together with our families, we request the honour of your presence at our wedding</p>
     <button class="cover-btn" id="open-btn" type="button"><i class="fa-regular fa-envelope-open"></i> View Invitation</button>
   </div>
 </div>
 
 <!-- ============ HERO ============ -->
 <section id="home">
-  <img class="hero-floral tl" src="assets/floral-white.webp" alt="">
-  <img class="hero-floral tr" src="assets/floral-white.webp" alt="">
+  <img class="hero-floral tl" src="assets/floral-blue.webp" alt="">
+  <img class="hero-floral tr" src="assets/floral-blue.webp" alt="">
   <div class="wrap">
+    <div class="arch-wrap reveal">
+      <div class="arch"><img src="assets/couple.webp" alt="Illustration of the couple exchanging garlands"></div>
+    </div>
     <p class="label hero-kicker reveal">The wedding of</p>
     <h1 class="hero-names reveal">
       <span data-bind="groom.short"></span>
       <span class="amp">&amp;</span>
       <span data-bind="bride.short"></span>
     </h1>
-    <div class="hero-date reveal" data-bind="dateLong"></div>
-    <div class="arch reveal">
-      <img src="assets/couple.webp" alt="Illustration of the couple exchanging garlands">
-    </div>
+    <div class="hero-date reveal"><span data-bind="weekday"></span><b data-bind="day"></b><span data-bind="monthYear"></span></div>
     <a class="scroll-hint" href="#invite"><span>Scroll</span><i class="fa-solid fa-chevron-down"></i></a>
   </div>
 </section>
@@ -337,7 +336,7 @@ footer { font-family: var(--sans); font-size: 11px; letter-spacing: .12em; color
 
 <!-- ============ CLOSING ============ -->
 <section id="closing">
-  <img class="hero-floral bl" src="assets/floral-white.webp" alt="" style="bottom:20px;left:-30px;opacity:.6">
+  <img class="closing-floral" src="assets/floral-white.webp" alt="">
   <div class="wrap">
     <p class="closing-quote reveal" data-bind="closingQuote"></p>
     <div class="closing-names reveal" data-bind="couple"></div>
@@ -411,8 +410,9 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ── Text bindings ── */
 const derived = {
   couple,
-  dateShort: fmt(firstEvent.start, { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase(),
-  dateLong: fmt(firstEvent.start, { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' }).replace(/,/g, ' ·'),
+  weekday: fmt(firstEvent.start, { weekday: 'long' }),
+  day: fmt(firstEvent.start, { day: '2-digit' }),
+  monthYear: fmt(firstEvent.start, { month: 'short', year: 'numeric' }),
   footer: `© ${fmt(firstEvent.start, { year: 'numeric' })} · ${couple}`,
 };
 const lookup = path => path in derived ? derived[path] : path.split('.').reduce((o, k) => (o == null ? o : o[k]), CONFIG);
@@ -427,10 +427,8 @@ document.getElementById('event-list').innerHTML = CONFIG.events.map((ev, i) => `
   <article class="event reveal">
     <div class="event-head">
       <div class="event-icon"><i class="fa-solid ${esc(ev.icon || 'fa-heart')}"></i></div>
-      <div>
-        <div class="event-name">${esc(ev.name)}</div>
-        <div class="label">${fmt(ev.start, { weekday: 'long', day: 'numeric', month: 'long' })}</div>
-      </div>
+      <div class="event-name">${esc(ev.name)}</div>
+      <div class="label">${fmt(ev.start, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</div>
     </div>
     <div class="event-body">
       <div class="row"><i class="fa-regular fa-clock"></i><div class="row-main">${esc(ev.timeText)}</div></div>
