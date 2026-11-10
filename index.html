@@ -94,8 +94,8 @@ img { max-width: 100%; display: block; }
 .mandala .spin-rev { transform-origin: 0 0; animation: spin 50s linear infinite reverse; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .mandala-mono {
-  position: absolute; left: 50%; top: 50%; width: 30%; transform: translate(-50%, -50%);
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,.4));
+  position: absolute; left: 50%; top: 50%; width: 32%; transform: translate(-50%, -50%);
+  filter: drop-shadow(0 1px 1px rgba(90,60,10,.35));
 }
 .cover-btn {
   margin-top: 36px; display: inline-flex; align-items: center; gap: 10px;
@@ -467,12 +467,10 @@ document.querySelectorAll('.heading h2').forEach(h =>
       <g class="spin-rev">
         ${dots(16, 70, 1.4)}
         <circle r="54"/>
-        <circle r="50" opacity=".5" stroke-dasharray="1.5 3"/>
-        ${ring(12, 'M0,-50 C9,-44 9,-36 0,-30 C-9,-36 -9,-44 0,-50Z')}
-        ${dots(12, 30, 1.1)}
+        <circle r="49" opacity=".6" stroke-dasharray="1.5 3"/>
       </g>
-      <circle r="31" fill="var(--navy)" stroke-width="1"/>
-      <circle r="28" opacity=".5"/>
+      <circle r="44" fill="#f7f2e8" stroke="var(--gold)" stroke-width="2.2"/>
+      <circle r="39.5" stroke="var(--gold)" stroke-width=".8"/>
     </g>`;
 })();
 
